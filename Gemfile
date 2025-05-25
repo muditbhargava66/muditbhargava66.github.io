@@ -1,4 +1,11 @@
 source 'https://rubygems.org'
+
+# Security fixes
+gem 'rexml', '~> 3.3.2'
+gem 'google-protobuf', '~> 4.27.5'
+gem 'webrick', '~> 1.8.2'
+gem 'nokogiri', '~> 1.18.3'
+
 group :jekyll_plugins do
     gem 'classifier-reborn'
     gem 'jekyll'
@@ -19,7 +26,6 @@ group :jekyll_plugins do
     gem 'jemoji'
     gem 'mini_racer'
     gem 'unicode_utils'
-    gem 'webrick'
 end
 group :other_plugins do
     gem 'css_parser'
