@@ -1,13 +1,112 @@
-_site
-.bundle
-.sass-cache
-.jekyll-cache
+# Jekyll
+_site/
+.bundle/
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-.DS_store
-.ruby-version
-.tweet-cache
+.tweet-cache/
 assets/libs/
+vendor/
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+.ruby-version
+.ruby-gemset
+.rvmrc
+
+# Node
 node_modules/
-vendor
-.obsidian/*
-.obsidian/cache/*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+.project
+.settings/
+.classpath
+*.sublime-workspace
+*.sublime-project
+.obsidian/
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Security
+*.pem
+*.key
+*.crt
+*.p12
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# Build files
+dist/
+build/
+out/
