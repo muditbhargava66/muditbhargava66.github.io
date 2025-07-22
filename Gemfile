@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Security fixes
-gem 'rexml', '~> 3.3.2'
-gem 'google-protobuf', '~> 4.27.5'
-gem 'webrick', '~> 1.8.2'
-gem 'nokogiri', '~> 1.18.3'
+gem 'rexml'
+gem 'google-protobuf'
+gem 'webrick'
+gem 'nokogiri'
 
 group :jekyll_plugins do
     gem 'classifier-reborn'
