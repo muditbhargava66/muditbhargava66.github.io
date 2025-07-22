@@ -1,12 +1,10 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - muditbhargava66
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - muditbhargava66/muditbhargava66.github.io
+  - xilinx/Vitis-AI
+  - pytorch/pytorch
+  - scipy/scipy
+  - analogdevicesinc/hdl
+  - YosysHQ/yosys

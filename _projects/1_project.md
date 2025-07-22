@@ -1,81 +1,163 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: FPGA-Accelerated Signal Processing
+description: High-performance signal processing algorithms implemented on FPGAs
+img: assets/img/fpga_signal_processing.jpg
 importance: 1
-category: work
-related_publications: true
+category: hardware
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Overview
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+This project focuses on implementing high-performance signal processing algorithms on Field-Programmable Gate Arrays (FPGAs) for real-time applications. By leveraging the parallel processing capabilities of FPGAs, we achieve significant speedups compared to traditional CPU-based implementations.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+## Key Features
+
+- **Ultra-low latency**: Sub-microsecond processing times
+- **High throughput**: Processing millions of samples per second
+- **Flexible architecture**: Easily adaptable to different signal processing tasks
+- **Energy efficient**: Optimized for performance per watt
+
+## Technical Implementation
+
+### Hardware Platform
+
+- **FPGA**: Xilinx Zynq UltraScale+ MPSoC
+- **Development Board**: ZCU104 Evaluation Kit
+- **Interface**: AXI4-Stream for high-speed data transfer
+
+### Signal Processing Algorithms Implemented
+
+#### 1. Fast Fourier Transform (FFT)
+
+- Radix-2 and Radix-4 implementations
+- Configurable transform sizes (256 to 4096 points)
+- Pipelined architecture for continuous data streaming
+
+#### 2. Digital Filtering
+
+- FIR filters with up to 256 taps
+- IIR filters (Butterworth, Chebyshev, Elliptic)
+- Adaptive filtering using LMS and RLS algorithms
+
+#### 3. Spectral Analysis
+
+- Power spectral density estimation
+- Spectrogram computation
+- Real-time spectrum analyzer
+
+### Performance Metrics
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>FPGA (MHz)</th>
+                        <th>CPU (MHz)</th>
+                        <th>Speedup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1024-pt FFT</td>
+                        <td>250</td>
+                        <td>3.2</td>
+                        <td>78x</td>
+                    </tr>
+                    <tr>
+                        <td>256-tap FIR</td>
+                        <td>300</td>
+                        <td>12.5</td>
+                        <td>24x</td>
+                    </tr>
+                    <tr>
+                        <td>Adaptive Filter</td>
+                        <td>200</td>
+                        <td>5.0</td>
+                        <td>40x</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
 </div>
 
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+## Applications
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
+This FPGA-accelerated signal processing platform has been successfully deployed in:
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+1. **Software-Defined Radio (SDR)**
+   - Real-time demodulation and decoding
+   - Wideband spectrum monitoring
 
-{% raw %}
+2. **Biomedical Signal Processing**
+   - ECG and EEG analysis
+   - Real-time anomaly detection
 
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
+3. **Financial Data Analysis**
+   - High-frequency trading signals
+   - Market microstructure analysis
+
+## Code Structure
+
+```
+fpga-signal-processing/
+├── hdl/
+│   ├── fft/
+│   ├── filters/
+│   └── interfaces/
+├── hls/
+│   ├── adaptive_filter/
+│   └── spectral_analysis/
+├── software/
+│   ├── drivers/
+│   └── applications/
+└── testbench/
+    ├── unit_tests/
+    └── system_tests/
 ```
 
-{% endraw %}
+## Getting Started
+
+### Prerequisites
+
+- Xilinx Vivado 2023.2 or later
+- Vitis HLS for high-level synthesis
+- Python 3.8+ for host applications
+
+### Building the Project
+
+```bash
+# Clone the repository
+git clone https://github.com/muditbhargava66/fpga-signal-processing.git
+
+# Build the hardware
+cd fpga-signal-processing
+make hw
+
+# Build the software
+make sw
+
+# Run tests
+make test
+```
+
+## Future Work
+
+- Implementation of machine learning inference engines
+- Support for multiple FPGA platforms
+- Integration with cloud-based FPGA services
+- Real-time visualization interfaces
+
+## Publications and Presentations
+
+- "High-Performance Signal Processing on FPGAs: A Practical Approach" - _In preparation_
+- Workshop presentation at FPGA Developer Forum 2024
+
+## Acknowledgments
+
+This project builds upon excellent open-source FPGA libraries and tools. Special thanks to the Xilinx community and contributors to open-source HDL projects.
