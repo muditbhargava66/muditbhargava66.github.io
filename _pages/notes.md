@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /my-notes/
-title: notes
+title: garden
 description: My personal digital garden of notes on various topics
 nav: true
 nav_order: 7
