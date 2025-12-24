@@ -93,7 +93,6 @@ git commit -m "Fix security vulnerabilities in dependencies
 1. **Gemfile.lock**: We've removed `Gemfile.lock` from `.gitignore`. This file should be committed to ensure consistent dependencies across all environments.
 
 2. **Continuous Security**: A GitHub Actions workflow has been added (`.github/workflows/security-check.yml`) that will:
-
    - Run weekly security checks
    - Alert you to new vulnerabilities
    - Help maintain up-to-date dependencies
