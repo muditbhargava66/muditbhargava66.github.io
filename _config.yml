@@ -41,7 +41,7 @@ repo_trophies:
 # will use title and url fields
 # Take a look to https://github.com/jekyll/jekyll-feed for more customization
 
-rss_icon: true
+rss_icon: false # disabled - RSS feed icon removed from navigation
 
 # -----------------------------------------------------------------------------
 # Layout
@@ -111,7 +111,7 @@ hal_id: # your HAL (archives-ouvertes.fr) author id
 academia_url: # your Academia.edu profile URL (e.g., https://yourname.academia.edu)
 
 contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+  For collaborations or inquiries, email is the best way to reach me. I typically respond within 24-48 hours.
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification

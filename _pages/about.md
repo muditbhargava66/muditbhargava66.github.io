@@ -9,41 +9,42 @@ profile:
   image: prof_pic_mudit.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>📍 Location: Available Worldwide</p>
-    <p>💼 Open to Opportunities</p>
-    <p>📧 muditbhargava666@gmail.com</p>
+    <p>Based in India</p>
+    <p>Open to opportunities worldwide</p>
+    <p>muditbhargava666@gmail.com</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Welcome! I'm **Mudit Bhargava**, a passionate engineer specializing in signal processing, financial modeling, machine learning/AI, and FPGA development. I combine technical expertise with creative problem-solving to build innovative solutions at the intersection of hardware and software.
+Welcome! I'm **Mudit Bhargava**, an engineer with a deep interest in bridging the gap between hardware and software. My work spans signal processing, financial modeling, machine learning, and FPGA development—areas that constantly push me to think across disciplines.
 
-## 🚀 What I Do
+## What I Work On
 
-I work on cutting-edge projects that leverage:
+My projects typically involve:
 
-- **Signal Processing**: Advanced algorithms for real-time data analysis and processing
-- **Financial Modeling**: Quantitative analysis and algorithmic trading strategies
-- **Machine Learning/AI**: Deep learning models and intelligent systems
-- **FPGA Development**: High-performance hardware acceleration and embedded systems
+- **Signal Processing** — Developing algorithms for real-time data analysis and embedded applications
+- **Financial Modeling** — Building quantitative models and exploring algorithmic trading strategies
+- **Machine Learning** — Designing neural networks and intelligent systems for practical problems
+- **FPGA Development** — Creating high-performance hardware accelerators and embedded systems
 
-## 💡 My Approach
+## My Philosophy
 
-I believe in the power of interdisciplinary thinking. By combining signal processing techniques with modern AI/ML approaches and implementing them on high-performance hardware like FPGAs, I create solutions that are both innovative and practical. My work spans from theoretical algorithm development to hands-on hardware implementation.
+I believe the most interesting problems live at the intersection of different fields. Combining rigorous signal processing with modern machine learning, then implementing it on custom hardware—that's where I find the work most rewarding. I enjoy taking ideas from theory all the way to working implementations.
 
-## 🎯 Current Focus
+## Current Interests
 
-I'm currently exploring:
+Right now, I'm focused on:
 
-- Real-time signal processing on FPGAs for financial applications
-- Machine learning models for predictive analytics in trading systems
-- Hardware acceleration of AI algorithms
-- Open-source contributions to the signal processing and FPGA communities
+- Hardware acceleration of AI algorithms on FPGAs
+- Real-time signal processing for financial applications
+- Contributing to open-source projects in the FPGA and signal processing space
+- Exploring the practical applications of ML in embedded systems
 
-## 🤝 Let's Connect
+## Get in Touch
 
-I'm always interested in collaborating on exciting projects and discussing new ideas. Whether you're working on signal processing challenges, need help with FPGA implementations, or want to explore AI/ML applications in finance, feel free to reach out!
+I'm always open to conversations about interesting technical challenges. If you're working on something in signal processing, need help with FPGA implementations, or want to discuss ML applications in finance, I'd be happy to connect.
 
-Check out my [projects](/projects/) to see what I've been working on, or explore my [blog](/blog/) where I share insights and tutorials on signal processing, FPGA development, and machine learning.
+Take a look at my [projects](/projects/) to see recent work, or browse my [publications](/publications/) for research I've been involved with.
+

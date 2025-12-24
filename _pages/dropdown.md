@@ -5,6 +5,8 @@ nav: true
 nav_order: 99
 dropdown: true
 children:
+  - title: people
+    permalink: /people/
   - title: photography
     permalink: /photography/
   - title: divider
