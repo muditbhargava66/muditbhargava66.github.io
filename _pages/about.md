@@ -6,7 +6,7 @@ subtitle: Signal Processing Engineer | Machine Learning & AI Enthusiast | FPGA D
 
 profile:
   align: right
-  image: prof_pic_.jpg
+  image: prof_pic_mudit.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>📍 Location: Available Worldwide</p>
