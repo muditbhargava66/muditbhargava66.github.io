@@ -13,10 +13,23 @@
 .*shields\.io.*
 .*badgen\.net.*
 
-# Optional: Social media that may block bots
+# Social media that may block bots
 .*linkedin\.com.*
 .*twitter\.com.*
 .*x\.com.*
+.*vsco\.co.*
+.*reddit\.com.*
+.*stackoverflow\.com.*
 
 # Scholar links (may require authentication)
 .*scholar\.google\.com/citations.*
+
+# ReadTheDocs (project-specific, may not exist yet)
+.*readthedocs\.io.*
+
+# YouTube playlists with query params
+.*youtube\.com/playlist.*
+
+# Placeholder/sample project repos
+.*github\.com/muditbhargava66/edge-ai-toolkit.*
+.*github\.com/muditbhargava66/libdsp.*

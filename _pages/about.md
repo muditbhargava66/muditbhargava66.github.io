@@ -47,4 +47,3 @@ Right now, I'm focused on:
 I'm always open to conversations about interesting technical challenges. If you're working on something in signal processing, need help with FPGA implementations, or want to discuss ML applications in finance, I'd be happy to connect.
 
 Take a look at my [projects](/projects/) to see recent work, or browse my [publications](/publications/) for research I've been involved with.
-
