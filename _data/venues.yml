@@ -1,9 +1,16 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
-  color: "#00369f"
+# Publication venue abbreviations and styling
+# Format: "abbr":
+#   url: venue homepage
+#   color: optional custom color for the badge
 
-"PhysRev":
-  url: https://journals.aps.org/
+"J. Phys.":
+  url: https://iopscience.iop.org/journal/1742-6596
+  color: "#2c5282"
 
-"Vision":
-  color: "#009f36"
+"arXiv":
+  url: https://arxiv.org/
+  color: "#b31b1b"
+
+"IEEE-NANO":
+  url: https://ieeexplore.ieee.org/xpl/conhome/8988000/proceeding
+  color: "#00629b"

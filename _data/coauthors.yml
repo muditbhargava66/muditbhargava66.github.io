@@ -1,34 +1,39 @@
-"adams":
-  - firstname: ["Edwin", "E.", "E. P.", "Edwin Plimpton"]
-    url: https://en.wikipedia.org/wiki/Edwin_Plimpton_Adams
+# Coauthors data for automatic linking in publications
+# Format: "lastname":
+#   - firstname: [variants of first name]
+#     url: profile URL (optional)
 
-"podolsky":
-  - firstname: ["Boris", "B.", "B. Y.", "Boris Yakovlevich"]
-    url: https://en.wikipedia.org/wiki/Boris_Podolsky
+"sivanathan":
+  - firstname: ["K.", "K. Sivanathan"]
+    url: https://scholar.google.com/citations?user=HwyFzaAAAAAJ&hl=en
 
-"rosen":
-  - firstname: ["Nathan", "N."]
-    url: https://en.wikipedia.org/wiki/Nathan_Rosen
+"mehta":
+  - firstname: ["Rushad", "R."]
 
-"bach":
-  - firstname: ["Johann Sebastian", "J. S."]
-    url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
+"adhikari":
+  - firstname: ["Chandan Das", "C. D.", "C. Das"]
 
-  - firstname: ["Carl Philipp Emanuel", "C. P. E."]
-    url: https://en.wikipedia.org/wiki/Carl_Philipp_Emanuel_Bach
+"tamboli":
+  - firstname: ["Alkausil", "A."]
 
-"przibram":
-  - firstname: ["Karl"]
-    url: https://link.springer.com/article/10.1007/s00016-019-00242-z
+"basu roy":
+  - firstname: ["Prithwish", "P."]
+    url: https://scholar.google.com/citations?user=IRvwAvAAAAAJ&hl=en
 
-"schrodinger":
-  - firstname: ["Erwin"]
-    url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+"chang":
+  - firstname: ["Chia-Yun", "C.Y.", "C.-Y."]
 
-"lorentz":
-  - firstname: ["Hendrik Antoon"]
-    url: https://en.wikipedia.org/wiki/Hendrik_Lorentz
+"hui":
+  - firstname: ["Ellen", "E."]
 
-"planck":
-  - firstname: ["Max"]
-    url: https://en.wikipedia.org/wiki/Max_Planck
+"gupta":
+  - firstname: ["Nikhil", "N."]
+    url: https://engineering.nyu.edu/faculty/nikhil-gupta
+
+"karri":
+  - firstname: ["Ramesh", "R."]
+    url: https://engineering.nyu.edu/faculty/ramesh-karri
+
+"pearce":
+  - firstname: ["Hammond", "H."]
+    url: https://www.cyberhammond.com/

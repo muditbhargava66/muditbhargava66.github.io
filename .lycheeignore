@@ -1,0 +1,22 @@
+# Lychee link checker ignore patterns
+# These URLs are excluded from broken link checks
+
+# External image/stats services (may return 503 temporarily)
+.*github-readme-stats.*
+.*vercel\.app/api.*
+.*github-profile-trophy.*
+
+# Rate-limited APIs
+.*api\.github\.com.*
+
+# External shields and badges  
+.*shields\.io.*
+.*badgen\.net.*
+
+# Optional: Social media that may block bots
+.*linkedin\.com.*
+.*twitter\.com.*
+.*x\.com.*
+
+# Scholar links (may require authentication)
+.*scholar\.google\.com/citations.*
