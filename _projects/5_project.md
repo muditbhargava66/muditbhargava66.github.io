@@ -216,4 +216,4 @@ make -j$(nproc)
 
 ## License
 
-GPL v3 - See [LICENSE](LICENSE) for details.
+This project is licensed under GPL v3.
