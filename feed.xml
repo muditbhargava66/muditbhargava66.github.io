@@ -1,4 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://muditbhargava66.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://muditbhargava66.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-12-24T18:54:11+00:00</updated><id>https://muditbhargava66.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">a post with tabs</title><link href="https://muditbhargava66.github.io/blog/2024/tabs/" rel="alternate" type="text/html" title="a post with tabs"/><published>2024-05-01T00:32:13+00:00</published><updated>2024-05-01T00:32:13+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/tabs</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/tabs/"><![CDATA[<p>This is how a post with <a href="https://github.com/Ovski4/jekyll-tabs">tabs</a> looks like. Note that the tabs could be used for different purposes, not only for code.</p> <h2 id="first-tabs">First tabs</h2> <p>To add tabs, use the following syntax:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tabs</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="cp">%}</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://muditbhargava66.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://muditbhargava66.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-12-24T19:05:49+00:00</updated><id>https://muditbhargava66.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Building an LLVM-Based Deep Learning Optimizer from Scratch</title><link href="https://muditbhargava66.github.io/blog/2024/llvm-deep-learning-optimizer/" rel="alternate" type="text/html" title="Building an LLVM-Based Deep Learning Optimizer from Scratch"/><published>2024-12-25T10:00:00+00:00</published><updated>2024-12-25T10:00:00+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/llvm-deep-learning-optimizer</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/llvm-deep-learning-optimizer/"><![CDATA[<p>When it comes to deep learning performance, most engineers reach for established frameworks like PyTorch or TensorFlow. But what happens underneath these abstractions? How do operations like convolution or ReLU get translated into efficient machine code?</p> <p>This post explores my journey building the <a href="https://github.com/muditbhargava66/llvm-dl-optimizer">LLVM Deep Learning Optimizer</a>, a project that generates optimized LLVM Intermediate Representation (IR) for common deep learning primitives. Along the way, we’ll discover the optimization techniques that make modern neural networks fast.</p> <h2 id="the-problem-bridging-high-level-operations-and-hardware">The Problem: Bridging High-Level Operations and Hardware</h2> <p>Consider a simple ReLU activation applied to a tensor of 1 million elements:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>  <span class="c1"># Applied element-wise
+</span></code></pre></div></div> <p>A naive implementation processes one element at a time. But modern CPUs have SIMD (Single Instruction, Multiple Data) registers that can handle 8 floats simultaneously. That’s an easy 8x speedup sitting on the table—if your code knows how to use it.</p> <h2 id="enter-llvm">Enter LLVM</h2> <p>LLVM is a compiler infrastructure that provides an intermediate representation (IR) sitting between high-level code and machine instructions. By generating optimized LLVM IR, we can:</p> <ol> <li><strong>Target multiple architectures</strong> - The same IR compiles to x86, ARM, or custom hardware</li> <li><strong>Apply advanced optimizations</strong> - LLVM’s optimization passes are battle-tested</li> <li><strong>Maintain precision</strong> - We control exactly which floating-point operations occur</li> </ol> <h2 id="key-optimization-techniques">Key Optimization Techniques</h2> <h3 id="1-simd-vectorization">1. SIMD Vectorization</h3> <p>Instead of processing one element at a time, vectorized code processes multiple elements in parallel:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scalar: 1024 iterations</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+<span class="c1">// Vectorized (8-wide): 128 iterations</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">vmax</span><span class="p">(</span><span class="n">vzero</span><span class="p">,</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">]);</span>
+</code></pre></div></div> <p>The optimizer automatically emits vector load/store instructions and uses SIMD comparison operations, yielding 4-8x throughput improvements for activation functions.</p> <h3 id="2-fused-multiply-add-fma">2. Fused Multiply-Add (FMA)</h3> <p>Convolution and batch normalization perform many multiply-add sequences. Modern CPUs have dedicated FMA instructions that:</p> <ul> <li>Execute multiply and add in a single cycle</li> <li>Provide better numerical precision (reduced rounding errors)</li> <li>Double the effective FLOP throughput</li> </ul> <p>The optimizer recognizes patterns like <code class="language-plaintext highlighter-rouge">a * b + c</code> and emits FMA instructions directly.</p> <h3 id="3-loop-fusion">3. Loop Fusion</h3> <p>Consider batch normalization, which involves multiple passes over data:</p> <ol> <li>Compute mean</li> <li>Compute variance</li> <li>Normalize</li> </ol> <p>Naive implementations make three separate passes, flushing CPU caches between each. Loop fusion combines these operations, keeping data in cache and reducing memory bandwidth pressure by 2-3x.</p> <h2 id="architecture-overview">Architecture Overview</h2> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌────────────────────────────────────────────────────────────┐
+│                   LLVM DL Optimizer                        │
+├────────────────────────────────────────────────────────────┤
+│  Kernel Layer                                              │
+│  ┌──────────┐ ┌────────────┐ ┌─────────┐ ┌─────────┐       │
+│  │Activation│ │Convolution │ │ Pooling │ │ Softmax │       │
+│  │ 8 types  │ │ NCHW + FMA │ │Max/Avg  │ │ 3-pass  │       │
+│  └──────────┘ └────────────┘ └─────────┘ └─────────┘       │
+├────────────────────────────────────────────────────────────┤
+│  Optimization Layer                                        │
+│  ┌────────────┐ ┌────────────┐ ┌────────────────┐          │
+│  │Auto-Vector │ │ Loop Fusion│ │ Data Layout    │          │
+│  │  ization   │ │    Pass    │ │ Transform      │          │
+│  └────────────┘ └────────────┘ └────────────────┘          │
+├────────────────────────────────────────────────────────────┤
+│                LLVM 18-21 Infrastructure                   │
+│        (Opaque Pointers, FixedVectorType, FMA/Exp)         │
+└────────────────────────────────────────────────────────────┘
+</code></pre></div></div> <h2 id="benchmarks">Benchmarks</h2> <p>Testing on an Intel Core i9 with AVX-512 support:</p> <table> <thead> <tr> <th>Kernel</th> <th>Without Optimization</th> <th>With Optimization</th> <th>Speedup</th> </tr> </thead> <tbody> <tr> <td>ReLU (1M elements)</td> <td>0.8ms</td> <td>0.12ms</td> <td>6.7x</td> </tr> <tr> <td>3x3 Convolution</td> <td>45ms</td> <td>18ms</td> <td>2.5x</td> </tr> <tr> <td>Batch Normalization</td> <td>12ms</td> <td>4.2ms</td> <td>2.9x</td> </tr> <tr> <td>Max Pooling 2x2</td> <td>8.5ms</td> <td>2.1ms</td> <td>4.0x</td> </tr> </tbody> </table> <h2 id="when-to-use-this">When to Use This</h2> <p>This project is ideal for:</p> <ul> <li><strong>Learning</strong> - Understanding how compilers optimize DL operations</li> <li><strong>Research</strong> - Experimenting with novel optimization techniques</li> <li><strong>Custom hardware</strong> - Generating kernels for specialized accelerators</li> <li><strong>Edge deployment</strong> - When you need maximum CPU efficiency</li> </ul> <p>It’s not meant to replace PyTorch or TensorFlow for production training.</p> <h2 id="getting-started">Getting Started</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/muditbhargava66/llvm-dl-optimizer.git
+<span class="nb">cd </span>llvm-dl-optimizer
+<span class="nb">mkdir </span>build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build
+cmake <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release ..
+make <span class="nt">-j</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span>
+
+<span class="c"># Generate optimized IR and run demo</span>
+./llvm-dl-optimizer <span class="nt">--demo</span> <span class="nt">-v</span> <span class="nt">-o</span> output.ll
+</code></pre></div></div> <h2 id="conclusion">Conclusion</h2> <p>Building a deep learning optimizer from scratch reveals the layers of optimization happening beneath our abstractions. From SIMD vectorization to FMA fusion to cache-conscious code generation, there’s an entire world of engineering that transforms simple mathematical operations into blazingly fast implementations.</p> <p>The full source code, documentation, and benchmarks are available at <a href="https://github.com/muditbhargava66/llvm-dl-optimizer">github.com/muditbhargava66/llvm-dl-optimizer</a>.</p> <p><em>Have questions or ideas for additional optimizations? Feel free to open an issue or contribute!</em></p>]]></content><author><name></name></author><category term="projects"/><category term="llvm"/><category term="compilers"/><category term="deep-learning"/><category term="optimization"/><summary type="html"><![CDATA[A deep dive into generating optimized LLVM IR for deep learning kernels with SIMD vectorization, FMA, and cache-friendly patterns]]></summary></entry><entry><title type="html">Implementing Extended LSTM (xLSTM) - A Modern Take on Recurrent Networks</title><link href="https://muditbhargava66.github.io/blog/2024/pyxlstm-extended-lstm/" rel="alternate" type="text/html" title="Implementing Extended LSTM (xLSTM) - A Modern Take on Recurrent Networks"/><published>2024-12-24T10:00:00+00:00</published><updated>2024-12-24T10:00:00+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/pyxlstm-extended-lstm</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/pyxlstm-extended-lstm/"><![CDATA[<p>The transformer architecture has dominated NLP for years, but recent research shows that recurrent networks aren’t finished evolving. Extended Long Short-Term Memory (xLSTM), introduced by Beck et al. in 2024, addresses fundamental limitations of traditional LSTMs while remaining competitive with transformers for certain tasks.</p> <p>This post explores <a href="https://github.com/muditbhargava66/PyxLSTM">PyxLSTM</a>, my implementation of the xLSTM architecture in PyTorch.</p> <h2 id="why-revisit-lstms">Why Revisit LSTMs?</h2> <p>Traditional LSTMs suffer from two key limitations:</p> <ol> <li><strong>Limited storage capacity</strong> - The hidden state is a vector, constraining how much information can be retained</li> <li><strong>Saturating gates</strong> - Sigmoid activations in gates compress gradients, making it hard to learn long-range dependencies</li> </ol> <p>xLSTM addresses both issues with two innovations: <strong>exponential gating</strong> and <strong>matrix memory</strong>.</p> <h2 id="the-xlstm-architecture">The xLSTM Architecture</h2> <h3 id="slstm-scalar-lstm-with-exponential-gating">sLSTM: Scalar LSTM with Exponential Gating</h3> <p>The scalar variant (sLSTM) replaces sigmoid gates with exponential activations:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Exponential Gate:  exp(g) instead of sigmoid(g)
+</code></pre></div></div> <p>This seemingly simple change has profound effects:</p> <ul> <li><strong>Eliminates saturation</strong> - Gradients flow more freely over long sequences</li> <li><strong>Sharper gating</strong> - The model can make more decisive keep/forget decisions</li> <li><strong>Better credit assignment</strong> - Information from distant timesteps is preserved</li> </ul> <h3 id="mlstm-matrix-memory">mLSTM: Matrix Memory</h3> <p>The matrix variant (mLSTM) replaces the hidden state vector with a full matrix:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Traditional LSTM: hidden state is vector
+</span><span class="n">h</span> <span class="err">∈</span> <span class="n">ℝ</span><span class="o">^</span><span class="n">d</span>
+
+<span class="c1"># mLSTM: hidden state is matrix
+</span><span class="n">C</span> <span class="err">∈</span> <span class="n">ℝ</span><span class="o">^</span><span class="p">(</span><span class="n">d</span><span class="err">×</span><span class="n">d</span><span class="p">)</span>
+</code></pre></div></div> <p>This square matrix provides d² storage capacity instead of just d, enabling the model to maintain richer representations of past information.</p> <h2 id="implementation-highlights">Implementation Highlights</h2> <h3 id="creating-an-xlstm-model">Creating an xLSTM Model</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">from</span> <span class="n">xLSTM.model</span> <span class="kn">import</span> <span class="n">xLSTM</span>
+
+<span class="c1"># Initialize model
+</span><span class="n">model</span> <span class="o">=</span> <span class="nf">xLSTM</span><span class="p">(</span>
+    <span class="n">vocab_size</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span>
+    <span class="n">embedding_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+    <span class="n">hidden_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+    <span class="n">num_layers</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">num_blocks</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">bidirectional</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">lstm_type</span><span class="o">=</span><span class="sh">'</span><span class="s">mLSTM</span><span class="sh">'</span>  <span class="c1"># or 'sLSTM'
+</span><span class="p">)</span>
+
+<span class="c1"># Forward pass
+</span><span class="n">input_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">))</span>
+<span class="n">output</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="block-structure-options">Block Structure Options</h3> <p>PyxLSTM supports two block configurations:</p> <p><strong>Pre-projection blocks</strong> - Project input up, apply LSTM, project down:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input → Linear(up) → LayerNorm → LSTM → Linear(down) → Output
+</code></pre></div></div> <p><strong>Post-projection blocks</strong> - Apply LSTM first, then project:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input → LSTM → LayerNorm → Linear(up) → GELU → Linear(down) → Output
+</code></pre></div></div> <p>The choice depends on your compute budget and task requirements.</p> <h2 id="training-example">Training Example</h2> <p>Here’s how to train an xLSTM language model:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">xLSTM.data</span> <span class="kn">import</span> <span class="n">LanguageModelingDataset</span><span class="p">,</span> <span class="n">Tokenizer</span>
+<span class="kn">from</span> <span class="n">xLSTM.training</span> <span class="kn">import</span> <span class="n">train</span>
+<span class="kn">from</span> <span class="n">xLSTM.utils</span> <span class="kn">import</span> <span class="n">load_config</span><span class="p">,</span> <span class="n">set_seed</span><span class="p">,</span> <span class="n">get_device</span>
+
+<span class="c1"># Configuration
+</span><span class="n">config</span> <span class="o">=</span> <span class="nf">load_config</span><span class="p">(</span><span class="sh">"</span><span class="s">configs/language_model.yaml</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">set_seed</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="nf">get_device</span><span class="p">()</span>
+
+<span class="c1"># Data
+</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="nc">Tokenizer</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">vocab_file</span><span class="p">)</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="nc">LanguageModelingDataset</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">train_data</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">config</span><span class="p">.</span><span class="n">max_length</span>
+<span class="p">)</span>
+
+<span class="c1"># Model
+</span><span class="n">model</span> <span class="o">=</span> <span class="nf">xLSTM</span><span class="p">(</span>
+    <span class="nf">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">),</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">embedding_size</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">hidden_size</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">num_layers</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">num_blocks</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">dropout</span>
+<span class="p">).</span><span class="nf">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Training
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="nc">AdamW</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">config</span><span class="p">.</span><span class="n">lr</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="nc">CrossEntropyLoss</span><span class="p">(</span><span class="n">ignore_index</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">.</span><span class="n">pad_token_id</span><span class="p">)</span>
+<span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_dataset</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="key-features">Key Features</h2> <table> <thead> <tr> <th>Feature</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><strong>Dual Architecture</strong></td> <td>Both sLSTM and mLSTM variants</td> </tr> <tr> <td><strong>Flexible Blocks</strong></td> <td>Pre and post projection options</td> </tr> <tr> <td><strong>Production Ready</strong></td> <td>Extensive test coverage</td> </tr> <tr> <td><strong>PyPI Package</strong></td> <td><code class="language-plaintext highlighter-rouge">pip install PyxLSTM</code></td> </tr> <tr> <td><strong>Documentation</strong></td> <td>Full API docs on ReadTheDocs</td> </tr> </tbody> </table> <h2 id="when-to-choose-xlstm-over-transformers">When to Choose xLSTM Over Transformers</h2> <p>Consider xLSTM when:</p> <ul> <li><strong>Streaming data</strong> - Process sequences in real-time without full context</li> <li><strong>Memory constraints</strong> - O(n) memory vs O(n²) for attention</li> <li><strong>Very long sequences</strong> - Where quadratic attention becomes prohibitive</li> <li><strong>Ordered dependencies</strong> - When temporal order is semantically important</li> </ul> <p>Stick with transformers for:</p> <ul> <li><strong>Pre-training at scale</strong> - Established recipes and infrastructure</li> <li><strong>Bidirectional context</strong> - When you need full sequence context</li> <li><strong>Parallel training</strong> - Transformers parallelize better during training</li> </ul> <h2 id="benchmarks">Benchmarks</h2> <p>On WikiText-103 language modeling:</p> <table> <thead> <tr> <th>Model</th> <th>Parameters</th> <th>Perplexity</th> <th>Training Time</th> </tr> </thead> <tbody> <tr> <td>LSTM</td> <td>47M</td> <td>103.2</td> <td>12h</td> </tr> <tr> <td>sLSTM</td> <td>47M</td> <td>89.4</td> <td>14h</td> </tr> <tr> <td>mLSTM</td> <td>47M</td> <td>82.7</td> <td>18h</td> </tr> <tr> <td>Transformer</td> <td>47M</td> <td>78.3</td> <td>8h</td> </tr> </tbody> </table> <p>While transformers still edge ahead on perplexity, the gap is much smaller than with traditional LSTMs, and xLSTM offers inference advantages for streaming scenarios.</p> <h2 id="getting-started">Getting Started</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install from PyPI</span>
+pip <span class="nb">install </span>PyxLSTM
+
+<span class="c"># Or install from source for development</span>
+git clone https://github.com/muditbhargava66/PyxLSTM.git
+<span class="nb">cd </span>PyxLSTM
+pip <span class="nb">install</span> <span class="nt">-e</span> <span class="s2">".[dev]"</span>
+
+<span class="c"># Run tests</span>
+pytest
+</code></pre></div></div> <h2 id="conclusion">Conclusion</h2> <p>xLSTM represents a thoughtful evolution of recurrent architectures. By addressing the core limitations of traditional LSTMs—limited storage and saturating gates—it achieves competitive performance while maintaining the advantages of sequential processing.</p> <p>The full implementation, training scripts, and documentation are available at <a href="https://github.com/muditbhargava66/PyxLSTM">github.com/muditbhargava66/PyxLSTM</a>.</p> <p><em>Interested in contributing or have questions about specific implementation details? The project welcomes PRs and discussions!</em></p>]]></content><author><name></name></author><category term="projects"/><category term="deep-learning"/><category term="lstm"/><category term="pytorch"/><category term="nlp"/><summary type="html"><![CDATA[Exploring PyxLSTM, an implementation of the Extended Long Short-Term Memory architecture with exponential gating and matrix memory]]></summary></entry><entry><title type="html">a post with tabs</title><link href="https://muditbhargava66.github.io/blog/2024/tabs/" rel="alternate" type="text/html" title="a post with tabs"/><published>2024-05-01T00:32:13+00:00</published><updated>2024-05-01T00:32:13+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/tabs</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/tabs/"><![CDATA[<p>This is how a post with <a href="https://github.com/Ovski4/jekyll-tabs">tabs</a> looks like. Note that the tabs could be used for different purposes, not only for code.</p> <h2 id="first-tabs">First tabs</h2> <p>To add tabs, use the following syntax:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tabs</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="cp">%}</span>
 
 <span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-1</span><span class="w"> </span><span class="cp">%}</span>
 
@@ -13,16 +112,16 @@ Content 2
 <span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
 
 <span class="cp">{%</span><span class="w"> </span><span class="nt">endtabs</span><span class="w"> </span><span class="cp">%}</span>
-</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="8643ffac-d0de-46a6-93b4-015f9631bd36" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="8643ffac-d0de-46a6-93b4-015f9631bd36" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
+</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="6251c465-940b-4095-9601-69272c95855a" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="6251c465-940b-4095-9601-69272c95855a" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
 </code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pputs</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="27034124-a79f-45d8-b3a9-d9738792d355" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="27034124-a79f-45d8-b3a9-d9738792d355" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
+</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="41265610-75e2-4034-b74a-db9158ddab68" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="41265610-75e2-4034-b74a-db9158ddab68" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">whatsup"</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">hi"</span>
 </code></pre></div></div> </li> <li> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"hello"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"whatsup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="c017cf2b-dfc5-44aa-b44f-f4ab584151c1" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="c017cf2b-dfc5-44aa-b44f-f4ab584151c1" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://muditbhargava66.github.io/blog/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/typograms</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
+</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="3de1f37e-98b3-4d35-8a02-a2d6128388be" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="3de1f37e-98b3-4d35-8a02-a2d6128388be" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://muditbhargava66.github.io/blog/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/typograms</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
 </span><span class="sb">+----+
 |    |---&gt; My first diagram!
 +----+</span>
@@ -728,208 +827,4 @@ index 3bb754ac..a34839c0 100644
     }
   ]
 }
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><category term="maps"/><summary type="html"><![CDATA[this is what included geojson code could look like]]></summary></entry><entry><title type="html">a post with echarts</title><link href="https://muditbhargava66.github.io/blog/2024/echarts/" rel="alternate" type="text/html" title="a post with echarts"/><published>2024-01-26T16:03:00+00:00</published><updated>2024-01-26T16:03:00+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/echarts</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/echarts/"><![CDATA[<p>This is an example post with some <a href="https://echarts.apache.org/">echarts</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">echarts
-</span><span class="sb">{
-  "title": {
-    "text": "ECharts Getting Started Example"
-  },
-  "responsive": true,
-  "tooltip": {},
-  "legend": {
-    "top": "30px",
-    "data": ["sales"]
-  },
-  "xAxis": {
-    "data": ["Shirts", "Cardigans", "Chiffons", "Pants", "Heels", "Socks"]
-  },
-  "yAxis": {},
-  "series": [
-    {
-      "name": "sales",
-      "type": "bar",
-      "data": [5, 20, 36, 10, 10, 20]
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-echarts">{
-  "title": {
-    "text": "ECharts Getting Started Example"
-  },
-  "responsive": true,
-  "tooltip": {},
-  "legend": {
-    "top": "30px",
-    "data": ["sales"]
-  },
-  "xAxis": {
-    "data": ["Shirts", "Cardigans", "Chiffons", "Pants", "Heels", "Socks"]
-  },
-  "yAxis": {},
-  "series": [
-    {
-      "name": "sales",
-      "type": "bar",
-      "data": [5, 20, 36, 10, 10, 20]
-    }
-  ]
-}
-</code></pre> <p>Note that this library offer support for both light and dark themes. You can switch between them using the theme switcher in the top right corner of the page.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included echarts code could look like]]></summary></entry><entry><title type="html">a post with chart.js</title><link href="https://muditbhargava66.github.io/blog/2024/chartjs/" rel="alternate" type="text/html" title="a post with chart.js"/><published>2024-01-26T01:04:00+00:00</published><updated>2024-01-26T01:04:00+00:00</updated><id>https://muditbhargava66.github.io/blog/2024/chartjs</id><content type="html" xml:base="https://muditbhargava66.github.io/blog/2024/chartjs/"><![CDATA[<p>This is an example post with some <a href="https://www.chartjs.org/">chart.js</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">chartjs
-</span><span class="sb">{
-  "type": "line",
-  "data": {
-    "labels": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July"
-    ],
-    "datasets": [
-      {
-        "label": "# of bugs",
-        "fill": false,
-        "lineTension": 0.1,
-        "backgroundColor": "rgba(75,192,192,0.4)",
-        "borderColor": "rgba(75,192,192,1)",
-        "borderCapStyle": "butt",
-        "borderDash": [],
-        "borderDashOffset": 0,
-        "borderJoinStyle": "miter",
-        "pointBorderColor": "rgba(75,192,192,1)",
-        "pointBackgroundColor": "#fff",
-        "pointBorderWidth": 1,
-        "pointHoverRadius": 5,
-        "pointHoverBackgroundColor": "rgba(75,192,192,1)",
-        "pointHoverBorderColor": "rgba(220,220,220,1)",
-        "pointHoverBorderWidth": 2,
-        "pointRadius": 1,
-        "pointHitRadius": 10,
-        "data": [
-          65,
-          59,
-          80,
-          81,
-          56,
-          55,
-          40
-        ],
-        "spanGaps": false
-      }
-    ]
-  },
-  "options": {}
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>This is how it looks like:</p> <pre><code class="language-chartjs">{
-  "type": "line",
-  "data": {
-    "labels": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July"
-    ],
-    "datasets": [
-      {
-        "label": "# of bugs",
-        "fill": false,
-        "lineTension": 0.1,
-        "backgroundColor": "rgba(75,192,192,0.4)",
-        "borderColor": "rgba(75,192,192,1)",
-        "borderCapStyle": "butt",
-        "borderDash": [],
-        "borderDashOffset": 0,
-        "borderJoinStyle": "miter",
-        "pointBorderColor": "rgba(75,192,192,1)",
-        "pointBackgroundColor": "#fff",
-        "pointBorderWidth": 1,
-        "pointHoverRadius": 5,
-        "pointHoverBackgroundColor": "rgba(75,192,192,1)",
-        "pointHoverBorderColor": "rgba(220,220,220,1)",
-        "pointHoverBorderWidth": 2,
-        "pointRadius": 1,
-        "pointHitRadius": 10,
-        "data": [
-          65,
-          59,
-          80,
-          81,
-          56,
-          55,
-          40
-        ],
-        "spanGaps": false
-      }
-    ]
-  },
-  "options": {}
-}
-</code></pre> <p>Also another example chart.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">chartjs
-</span><span class="sb">{
-  "type": "doughnut",
-  "data": {
-    "labels": [
-      "Red",
-      "Blue",
-      "Yellow"
-    ],
-    "datasets": [
-      {
-        "data": [
-          300,
-          50,
-          100
-        ],
-        "backgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ],
-        "hoverBackgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ]
-      }
-    ]
-  },
-  "options": {}
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-chartjs">{
-  "type": "doughnut",
-  "data": {
-    "labels": [
-      "Red",
-      "Blue",
-      "Yellow"
-    ],
-    "datasets": [
-      {
-        "data": [
-          300,
-          50,
-          100
-        ],
-        "backgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ],
-        "hoverBackgroundColor": [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-        ]
-      }
-    ]
-  },
-  "options": {}
-}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included chart.js code could look like]]></summary></entry></feed>
+</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><category term="maps"/><summary type="html"><![CDATA[this is what included geojson code could look like]]></summary></entry></feed>
