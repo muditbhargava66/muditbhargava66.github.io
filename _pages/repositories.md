@@ -3,7 +3,7 @@ layout: page
 permalink: /repositories/
 title: repositories
 description: A showcase of my open-source projects and contributions in FPGA/ASIC design, compiler optimization, and embedded systems.
-nav: false
+nav: true
 nav_order: 4
 ---
 
