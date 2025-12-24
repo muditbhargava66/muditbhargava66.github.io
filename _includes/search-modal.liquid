@@ -1,0 +1,165 @@
+<!-- Search Modal (Cmd+K / Ctrl+K) -->
+<div id="search-modal" class="search-modal" style="display: none;">
+  <div class="search-modal-backdrop" onclick="closeSearchModal()"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-input-icon"></i>
+        <input type="text" id="search-input" placeholder="Search pages, posts, projects..." autocomplete="off">
+        <span class="search-shortcut-hint">ESC</span>
+      </div>
+    </div>
+    <div class="search-modal-body" id="search-results">
+      <div class="search-hint">
+        <p>Type to search across all content...</p>
+        <div class="search-shortcuts-help">
+          <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+          <span><kbd>Enter</kbd> to select</span>
+          <span><kbd>ESC</kbd> to close</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Search Modal Logic with Cmd+K / Ctrl+K
+(function() {
+  const searchModal = document.getElementById('search-modal');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const searchToggle = document.getElementById('search-toggle');
+  
+  // Search data - will be populated with site content
+  let searchData = [];
+  
+  // Open modal
+  function openSearchModal() {
+    searchModal.style.display = 'flex';
+    searchInput.value = '';
+    searchInput.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // Close modal
+  window.closeSearchModal = function() {
+    searchModal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  
+  // Keyboard shortcut: Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (searchModal.style.display === 'none' || searchModal.style.display === '') {
+        openSearchModal();
+      } else {
+        closeSearchModal();
+      }
+    }
+    
+    // ESC to close
+    if (e.key === 'Escape' && searchModal.style.display === 'flex') {
+      closeSearchModal();
+    }
+  });
+  
+  // Search toggle button
+  if (searchToggle) {
+    searchToggle.addEventListener('click', openSearchModal);
+  }
+  
+  // Load search data from site
+  async function loadSearchData() {
+    try {
+      // Try to load search index if available
+      const response = await fetch('{{ "/assets/js/search-data.json" | relative_url }}');
+      if (response.ok) {
+        searchData = await response.json();
+      }
+    } catch (e) {
+      // Search data not available, use basic search
+      searchData = [
+        { title: 'Home', url: '{{ "/" | relative_url }}', type: 'page' },
+        { title: 'Publications', url: '{{ "/publications/" | relative_url }}', type: 'page' },
+        { title: 'Projects', url: '{{ "/projects/" | relative_url }}', type: 'page' },
+        { title: 'Blog', url: '{{ "/blog/" | relative_url }}', type: 'page' },
+        { title: 'CV', url: '{{ "/cv/" | relative_url }}', type: 'page' },
+        { title: 'Repositories', url: '{{ "/repositories/" | relative_url }}', type: 'page' },
+        { title: 'Teaching', url: '{{ "/teaching/" | relative_url }}', type: 'page' }
+      ];
+    }
+  }
+  
+  // Search function
+  function performSearch(query) {
+    if (!query.trim()) {
+      searchResults.innerHTML = `
+        <div class="search-hint">
+          <p>Type to search across all content...</p>
+          <div class="search-shortcuts-help">
+            <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+            <span><kbd>Enter</kbd> to select</span>
+            <span><kbd>ESC</kbd> to close</span>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    
+    const results = searchData.filter(item => 
+      item.title.toLowerCase().includes(query.toLowerCase()) ||
+      (item.content && item.content.toLowerCase().includes(query.toLowerCase()))
+    ).slice(0, 8);
+    
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      return;
+    }
+    
+    searchResults.innerHTML = results.map((item, index) => `
+      <a href="${item.url}" class="search-result-item ${index === 0 ? 'active' : ''}">
+        <span class="search-result-type">${item.type || 'page'}</span>
+        <span class="search-result-title">${item.title}</span>
+      </a>
+    `).join('');
+  }
+  
+  // Input handler
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      performSearch(e.target.value);
+    });
+    
+    // Keyboard navigation in results
+    searchInput.addEventListener('keydown', function(e) {
+      const items = searchResults.querySelectorAll('.search-result-item');
+      const activeItem = searchResults.querySelector('.search-result-item.active');
+      
+      if (e.key === 'ArrowDown' && items.length > 0) {
+        e.preventDefault();
+        let nextIndex = 0;
+        if (activeItem) {
+          activeItem.classList.remove('active');
+          nextIndex = (Array.from(items).indexOf(activeItem) + 1) % items.length;
+        }
+        items[nextIndex].classList.add('active');
+      } else if (e.key === 'ArrowUp' && items.length > 0) {
+        e.preventDefault();
+        let prevIndex = items.length - 1;
+        if (activeItem) {
+          activeItem.classList.remove('active');
+          prevIndex = (Array.from(items).indexOf(activeItem) - 1 + items.length) % items.length;
+        }
+        items[prevIndex].classList.add('active');
+      } else if (e.key === 'Enter' && activeItem) {
+        e.preventDefault();
+        window.location.href = activeItem.href;
+      }
+    });
+  }
+  
+  // Load search data on page load
+  loadSearchData();
+})();
+</script>

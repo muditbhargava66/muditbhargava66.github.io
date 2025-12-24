@@ -108,6 +108,13 @@
             {% endif %}
           {% endfor %}
           {% if site.enable_darkmode %}
+            <!-- Search Button (Cmd+K / Ctrl+K) -->
+            <li class="nav-item">
+              <button id="search-toggle" class="nav-link search-btn" title="Search (⌘K)">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-shortcut">⌘K</span>
+              </button>
+            </li>
             <!-- Toogle theme mode -->
             <li class="toggle-container">
               <button id="light-toggle" title="Change theme">

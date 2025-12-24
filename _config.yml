@@ -107,6 +107,8 @@ work_url: # work page URL
 x_username: mudit_bhargava_ # your X handle
 youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 zotero_username: # your zotero username
+hal_id: # your HAL (archives-ouvertes.fr) author id
+academia_url: # your Academia.edu profile URL (e.g., https://yourname.academia.edu)
 
 contact_note: >
   You can even add a little note about which of these is the best way to reach you.
@@ -410,7 +412,7 @@ animation:
 # Optional Features
 # -----------------------------------------------------------------------------
 
-enable_google_analytics: false # enables google analytics
+enable_google_analytics: true # enables google analytics
 enable_cronitor_analytics: false # enables cronitor RUM analytics
 enable_google_verification: false # enables google site verification
 enable_bing_verification: false # enables bing site verification

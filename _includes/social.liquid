@@ -118,6 +118,12 @@
 {% if site.zotero_username %}
   <a href="https://www.zotero.org/{{ site.zotero_username }}" title="Zotero"><i class="ai ai-zotero"></i></a>
 {% endif %}
+{% if site.hal_id %}
+  <a href="https://hal.archives-ouvertes.fr/search/index/q/*/authIdHal_s/{{ site.hal_id }}" title="HAL"><i class="ai ai-hal"></i></a>
+{% endif %}
+{% if site.academia_url %}
+  <a href="{{ site.academia_url }}" title="Academia.edu"><i class="ai ai-academia"></i></a>
+{% endif %}
 {% if site.rss_icon %}
   <a href="{{ site.baseurl }}/feed.xml" title="RSS Feed"><i class="fa-solid fa-square-rss"></i></a>
 {% endif %}
