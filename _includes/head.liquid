@@ -58,7 +58,14 @@
 {% endif %}
 
 {% assign icon_is_file = site.icon | split: '.' | last | downcase %}
-{% if icon_is_file == 'png' or icon_is_file == 'ico' or icon_is_file == 'svg' or icon_is_file == 'jpg' or icon_is_file == 'jpeg' or icon_is_file == 'webp' or icon_is_file == 'gif' %}
+{% if icon_is_file == 'png'
+  or icon_is_file == 'ico'
+  or icon_is_file == 'svg'
+  or icon_is_file == 'jpg'
+  or icon_is_file == 'jpeg'
+  or icon_is_file == 'webp'
+  or icon_is_file == 'gif'
+%}
   <link rel="shortcut icon" href="{{ site.icon | prepend: '/assets/img/' | relative_url | bust_file_cache}}">
 {% elsif site.icon != blank %}
   <link

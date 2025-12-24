@@ -2,9 +2,15 @@ github_users:
   - muditbhargava66
 
 github_repos:
-  - muditbhargava66/muditbhargava66.github.io
-  - xilinx/Vitis-AI
-  - pytorch/pytorch
-  - scipy/scipy
-  - analogdevicesinc/hdl
-  - YosysHQ/yosys
+  - muditbhargava66/llvm-dl-optimizer
+  - muditbhargava66/tiny-gpu
+  - muditbhargava66/pico-rtos
+  - muditbhargava66/NeoRAM
+  - muditbhargava66/Advanced-Image-Sensor-Interface
+  - muditbhargava66/vmips-simulator
+  - muditbhargava66/RISC-V-Processor-Verilog
+  - muditbhargava66/Superscalar-Pipeline-Simulator
+  - muditbhargava66/CacheSimulator
+  - muditbhargava66/FFT-implementation-in-C
+  - muditbhargava66/wirelesscomm
+  - muditbhargava66/pico-os
