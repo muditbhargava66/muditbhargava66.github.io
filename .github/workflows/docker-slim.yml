@@ -1,5 +1,9 @@
 name: Docker Slim
 
+# DISABLED: This workflow is for al-folio maintainers only
+# It requires Docker Hub credentials and pushes to amirpourmand/al-folio
+# Not needed for personal portfolio sites
+
 #Only trigger, when the build workflow succeeded
 on:
   workflow_run:
@@ -14,8 +18,8 @@ on:
 
 jobs:
   build:
-    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} and github.repository_owner == 'alshedivat'
+    # DISABLED - this workflow is not applicable to forks/personal sites
+    if: false
     runs-on: ubuntu-latest
     defaults:
       run:

@@ -1,5 +1,9 @@
 name: Docker Image CI (Upload Tag)
 
+# DISABLED: This workflow is for al-folio maintainers only
+# It requires Docker Hub credentials and pushes to amirpourmand/al-folio
+# Not needed for personal portfolio sites
+
 on:
   push:
     tags:
@@ -14,6 +18,8 @@ on:
 
 jobs:
   build:
+    # DISABLED - this workflow is not applicable to forks/personal sites
+    if: false
     runs-on: ubuntu-latest
 
     steps:
