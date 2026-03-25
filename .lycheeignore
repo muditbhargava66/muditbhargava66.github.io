@@ -33,3 +33,6 @@
 # Placeholder/sample project repos
 .*github\.com/muditbhargava66/edge-ai-toolkit.*
 .*github\.com/muditbhargava66/libdsp.*
+
+# Documentation sites that block bots (403)
+.*docs\.conda\.io.*
