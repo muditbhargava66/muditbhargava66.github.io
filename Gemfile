@@ -5,6 +5,8 @@ gem 'rexml', '>= 3.4.2'
 gem 'google-protobuf'
 gem 'webrick'
 gem 'nokogiri'
+gem 'addressable', '>= 2.9.0'
+gem 'ostruct'
 
 group :jekyll_plugins do
     gem 'classifier-reborn'
@@ -30,7 +32,6 @@ end
 group :other_plugins do
     gem 'css_parser'
     gem 'feedjira'
-    # httparty 0.23.3 with SSRF fix (CVE-2025-68696) not yet on RubyGems
-    # Using GitHub main branch with the fix (commit ddfbc8d from Dec 23, 2025)
-    gem 'httparty', github: 'jnunemaker/httparty', branch: 'main'
+    # httparty 0.24.2+ contains the SSRF fix (CVE-2025-68696)
+    gem 'httparty', '>= 0.24.2'
 end
