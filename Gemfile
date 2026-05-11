@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rexml', '>= 3.4.2'
 gem 'google-protobuf'
 gem 'webrick'
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.19.3'
 gem 'addressable', '>= 2.9.0'
 gem 'ostruct'
 
@@ -30,7 +30,7 @@ group :jekyll_plugins do
     gem 'unicode_utils'
 end
 group :other_plugins do
-    gem 'css_parser'
+    gem 'css_parser', '>= 2.1.0'
     gem 'feedjira'
     # httparty 0.24.2+ contains the SSRF fix (CVE-2025-68696)
     gem 'httparty', '>= 0.24.2'
