@@ -20,7 +20,7 @@ bundle install
 
 # Update the system gems to ensure we have the latest versions
 echo "💎 Updating system gems..."
-bundle update rexml google-protobuf webrick nokogiri
+bundle update rexml google-protobuf webrick nokogiri concurrent-ruby crass css_parser
 
 echo "✅ Dependencies updated successfully!"
 echo "🔍 You can verify the versions with: bundle show"
