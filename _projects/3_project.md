@@ -251,9 +251,7 @@ public:
 
 ## Resources
 
-- [GitHub Repository](https://github.com/muditbhargava66/edge-ai-toolkit)
-- [Documentation](https://edge-ai-docs.readthedocs.io)
-- [Tutorial Series](https://www.youtube.com/playlist?edge-ai-tutorials)
+- [GitHub Repository](https://github.com/muditbhargava66)
 
 ## Collaboration
 
@@ -262,5 +260,3 @@ This project is open for collaboration. If you're interested in:
 - Contributing code or documentation
 - Testing on new hardware platforms
 - Sharing use cases or applications
-
-Please reach out via [email](mailto:muditbhargava666@gmail.com) or open an issue on GitHub!
