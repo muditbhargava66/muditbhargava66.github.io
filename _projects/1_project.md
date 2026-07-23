@@ -1,163 +1,61 @@
 ---
 layout: page
-title: FPGA-Accelerated Signal Processing
-description: High-performance signal processing algorithms implemented on FPGAs
-img: assets/img/fpga_signal_processing.jpg
+title: Open-Crypto-HDL
+description: Production-grade cryptographic RTL library with formal verification — AES-256-GCM, ChaCha20-Poly1305, DES/3DES
+# img: assets/img/1.jpg
 importance: 1
-category: hardware
+category: hardware-security
 related_publications: false
 ---
 
 ## Overview
 
-This project focuses on implementing high-performance signal processing algorithms on Field-Programmable Gate Arrays (FPGAs) for real-time applications. By leveraging the parallel processing capabilities of FPGAs, we achieve significant speedups compared to traditional CPU-based implementations.
+**open-crypto-hdl** is an open-source, production-grade cryptographic hardware library implementing industry-standard ciphers in synthesizable Verilog/SystemVerilog. Every module ships with a full formal verification suite (SymbiYosys) and simulation testbenches (cocotb), targeting both FPGA prototyping and ASIC tapeout via the TinyTapeout/sky130A flow.
 
-## Key Features
+## Implemented Ciphers
 
-- **Ultra-low latency**: Sub-microsecond processing times
-- **High throughput**: Processing millions of samples per second
-- **Flexible architecture**: Easily adaptable to different signal processing tasks
-- **Energy efficient**: Optimized for performance per watt
+| Cipher            | Standard        | Key Sizes       | Status   |
+| ----------------- | --------------- | --------------- | -------- |
+| AES-256-GCM       | NIST SP 800-38D | 128/192/256-bit | Verified |
+| ChaCha20-Poly1305 | RFC 8439        | 256-bit         | Verified |
+| DES / 3DES        | FIPS 46-3       | 56/168-bit      | Verified |
 
-## Technical Implementation
+## Architecture
 
-### Hardware Platform
+The library follows a consistent interface pattern across all cipher implementations:
 
-- **FPGA**: Xilinx Zynq UltraScale+ MPSoC
-- **Development Board**: ZCU104 Evaluation Kit
-- **Interface**: AXI4-Stream for high-speed data transfer
+- **AXI4-Stream compatible** data interfaces for seamless SoC integration
+- **FuseSoC** build system for reproducible builds across toolchains
+- **Parameterized designs** — configurable pipeline depth, key width, and throughput vs. area tradeoffs
+- **Constant-time implementations** to resist timing side-channel attacks
 
-### Signal Processing Algorithms Implemented
+## Verification Methodology
 
-#### 1. Fast Fourier Transform (FFT)
+### Formal Verification (SymbiYosys)
 
-- Radix-2 and Radix-4 implementations
-- Configurable transform sizes (256 to 4096 points)
-- Pipelined architecture for continuous data streaming
+- Bounded model checking for all state machines
+- Safety properties: no illegal state transitions, key material never exposed on data ports
+- Liveness properties: every valid input eventually produces output
 
-#### 2. Digital Filtering
+### Simulation Testing (cocotb)
 
-- FIR filters with up to 256 taps
-- IIR filters (Butterworth, Chebyshev, Elliptic)
-- Adaptive filtering using LMS and RLS algorithms
+- NIST Known Answer Tests (KATs) for each cipher
+- Randomized testing with reference Python implementations
+- Corner cases: back-to-back operations, key changes mid-stream, reset recovery
 
-#### 3. Spectral Analysis
+## ASIC Target
 
-- Power spectral density estimation
-- Spectrogram computation
-- Real-time spectrum analyzer
-
-### Performance Metrics
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th>Algorithm</th>
-                        <th>FPGA (MHz)</th>
-                        <th>CPU (MHz)</th>
-                        <th>Speedup</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1024-pt FFT</td>
-                        <td>250</td>
-                        <td>3.2</td>
-                        <td>78x</td>
-                    </tr>
-                    <tr>
-                        <td>256-tap FIR</td>
-                        <td>300</td>
-                        <td>12.5</td>
-                        <td>24x</td>
-                    </tr>
-                    <tr>
-                        <td>Adaptive Filter</td>
-                        <td>200</td>
-                        <td>5.0</td>
-                        <td>40x</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-## Applications
-
-This FPGA-accelerated signal processing platform has been successfully deployed in:
-
-1. **Software-Defined Radio (SDR)**
-   - Real-time demodulation and decoding
-   - Wideband spectrum monitoring
-
-2. **Biomedical Signal Processing**
-   - ECG and EEG analysis
-   - Real-time anomaly detection
-
-3. **Financial Data Analysis**
-   - High-frequency trading signals
-   - Market microstructure analysis
-
-## Code Structure
+The library includes a TinyTapeout-compatible wrapper targeting the **sky130A** process:
 
 ```
-fpga-signal-processing/
-├── hdl/
-│   ├── fft/
-│   ├── filters/
-│   └── interfaces/
-├── hls/
-│   ├── adaptive_filter/
-│   └── spectral_analysis/
-├── software/
-│   ├── drivers/
-│   └── applications/
-└── testbench/
-    ├── unit_tests/
-    └── system_tests/
+Synthesis results (sky130A, typical corner):
+  - AES-256-GCM core: ~12,000 standard cells
+  - Max frequency: ~150 MHz
+  - Power: ~8 mW @ 100 MHz
 ```
 
-## Getting Started
+## Links
 
-### Prerequisites
-
-- Xilinx Vivado 2023.2 or later
-- Vitis HLS for high-level synthesis
-- Python 3.8+ for host applications
-
-### Building the Project
-
-```bash
-# Clone the repository
-git clone https://github.com/muditbhargava66/fpga-signal-processing.git
-
-# Build the hardware
-cd fpga-signal-processing
-make hw
-
-# Build the software
-make sw
-
-# Run tests
-make test
-```
-
-## Future Work
-
-- Implementation of machine learning inference engines
-- Support for multiple FPGA platforms
-- Integration with cloud-based FPGA services
-- Real-time visualization interfaces
-
-## Publications and Presentations
-
-- "High-Performance Signal Processing on FPGAs: A Practical Approach" - _In preparation_
-- Workshop presentation at FPGA Developer Forum 2024
-
-## Acknowledgments
-
-This project builds upon excellent open-source FPGA libraries and tools. Special thanks to the Xilinx community and contributors to open-source HDL projects.
+- **Repository**: [github.com/muditbhargava66/open-crypto-hdl](https://github.com/muditbhargava66/open-crypto-hdl)
+- **Build system**: FuseSoC — `fusesoc run --target=lint open-crypto-hdl`
+- **CI**: GitHub Actions — formal verification + simulation on every push

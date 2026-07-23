@@ -1,0 +1,82 @@
+/* _sass/_motion.scss */
+
+/* Base properties for elements that will be revealed */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  /* Use a cubic-bezier approximating a critically damped spring response */
+  /* response ~0.4s */
+  transition:
+    opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Translucent toolbar/materials (SKILLS.md §12) */
+.glass-material {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+[data-theme="dark"] .glass-material {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Add hover feedback on pointer-down (SKILLS.md §1) */
+.card:active,
+.btn:active,
+a.btn:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
+}
+
+/* Respect reduced motion (SKILLS.md §14) */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    transform: none !important;
+    transition: opacity 0.4s ease !important;
+  }
+
+  .card:active,
+  .btn:active,
+  a.btn:active {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-material {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html:not([data-theme="dark"]) .glass-material {
+    background: white !important;
+  }
+
+  [data-theme="dark"] .glass-material {
+    background: black !important;
+  }
+}
+
+/* Typography refinements*/
+h1,
+h2,
+h3,
+.post-title,
+.display {
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+}
+
+body {
+  letter-spacing: 0.01em;
+  /* slight positive tracking for body text */
+}

@@ -1,5 +1,5 @@
 FROM ruby:3.4.5
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL maintainer="Mudit Bhargava"
 

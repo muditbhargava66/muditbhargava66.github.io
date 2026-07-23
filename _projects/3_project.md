@@ -2,7 +2,7 @@
 layout: page
 title: Edge AI for IoT Devices
 description: Deploying machine learning models on resource-constrained embedded systems
-img: assets/img/edge_ai.jpg
+# img: assets/img/3.jpg
 importance: 3
 category: embedded
 ---
@@ -94,7 +94,7 @@ Real-time vibration analysis for industrial equipment:
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/smart_agriculture_demo.jpg" title="Smart Agriculture System" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/3.jpg" title="Smart Agriculture System" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">

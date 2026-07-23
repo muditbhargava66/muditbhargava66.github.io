@@ -2,10 +2,10 @@
 layout: page
 title: projects
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: Hardware security, formal verification, and systems engineering — from RTL to silicon.
 nav: true
 nav_order: 3
-display_categories: [work, fun]
+display_categories: [hardware-security, systems, side-projects]
 horizontal: false
 ---
 

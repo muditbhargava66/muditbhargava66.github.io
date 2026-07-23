@@ -7,9 +7,9 @@ first_name: Mudit
 middle_name:
 last_name: Bhargava
 email: muditbhargava666@gmail.com
-keywords: Signal processing, financial modeling, Machine Learning/AI, FPGA Development, portfolio-website # add your own keywords or leave empty
+keywords: hardware security, formal verification, RTL design, SystemVerilog, ASIC, FPGA, cocotb, SymbiYosys, digital design, portfolio # add your own keywords or leave empty
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+  Hardware security & formal verification engineer — RTL to silicon. Publications in ACM ASIACCS, IEEE, and arXiv.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
@@ -289,7 +289,7 @@ jekyll-archives:
     category: "/blog/category/:name/"
 
 display_tags: ["formatting", "images", "links", "math", "code"] # these tags will be displayed on the front page of your blog
-display_categories: ["blockquotes"] # these categories will be displayed on the front page of your blog
+display_categories: ["sample-posts", "blockquotes"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

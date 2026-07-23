@@ -6,85 +6,76 @@
     - name: Email
       value: muditbhargava666@gmail.com
     - name: Specializations
-      value: Signal Processing, Financial Modeling, Machine Learning/AI, FPGA Development
+      value: Hardware Security, Formal Verification, RTL/ASIC Design, Systems Architecture
     - name: Languages
       value: English, Hindi
 
 - title: Technical Skills
   type: nested_list
   contents:
-    - title: Programming Languages
+    - title: RTL & HDL Design
       items:
-        - Python, C/C++, Verilog/SystemVerilog, MATLAB
-        - JavaScript, Ruby, Shell Scripting
-    - title: Machine Learning & AI
+        - Verilog, SystemVerilog, VHDL
+        - AXI4/AXI4-Stream interfaces, JTAG/IEEE 1149.1
+        - Cryptographic RTL (AES-256-GCM, ChaCha20-Poly1305, DES/3DES)
+    - title: Formal Verification & Testing
       items:
-        - TensorFlow, PyTorch, Scikit-learn, Keras
-        - Deep Learning, Computer Vision, NLP
+        - SymbiYosys (bounded model checking, k-induction)
+        - SystemVerilog Assertions (SVA) — property suites, cover properties
+        - cocotb (Python-based simulation testbenches)
+        - Verilator, Icarus Verilog
+    - title: ASIC & FPGA Flow
+      items:
+        - Xilinx Vivado, Intel Quartus Prime
+        - TinyTapeout / sky130A PDK (OpenLane ASIC flow)
+        - FuseSoC build system integration
+        - Synthesis, place-and-route, timing closure
+    - title: Programming & Systems
+      items:
+        - Python, C/C++, MATLAB, Shell Scripting
+        - Git, GitHub Actions CI/CD, Docker
+        - Jupyter Notebooks, VS Code
+    - title: Machine Learning & Data (secondary)
+      items:
+        - TensorFlow, PyTorch, Scikit-learn
         - Time Series Analysis, Predictive Modeling
-    - title: Signal Processing
-      items:
-        - Digital Signal Processing (DSP)
-        - Real-time Signal Analysis
-        - Fourier Analysis, Wavelet Transforms
-        - Adaptive Filtering, Spectral Analysis
-    - title: FPGA & Hardware
-      items:
-        - Xilinx Vivado, Intel Quartus
-        - High-Level Synthesis (HLS)
-        - FPGA-based Acceleration
-        - Embedded Systems Design
-    - title: Financial Technologies
-      items:
-        - Quantitative Analysis
-        - Algorithmic Trading Systems
-        - Risk Modeling
-        - Time Series Forecasting
+        - Pandas, NumPy, SciPy
 
-- title: Areas of Interest
-  type: nested_list
+- title: Research Interests
+  type: list
   contents:
-    - title: Research Interests
-      items:
-        - Hardware Acceleration of ML Algorithms
-        - Real-time Signal Processing on FPGAs
-        - Quantitative Finance and Algorithmic Trading
-        - Edge AI and Embedded Machine Learning
-    - title: Application Domains
-      items:
-        - Financial Technology (FinTech)
-        - Telecommunications
-        - Biomedical Signal Processing
-        - Autonomous Systems
+    - Hardware security — Trojan detection, side-channel analysis, secure manufacturing
+    - Formal verification as a security assurance mechanism for cryptographic hardware
+    - RTL-to-silicon design flows with open-source EDA toolchains
+    - Processor microarchitecture — superscalar pipelines, cache hierarchies, RISC-V
 
 - title: Professional Development
   type: list
   contents:
-    - Continuous learning through online courses and certifications
-    - Active participation in open-source projects
-    - Regular contribution to technical blogs and forums
-    - Attendance at conferences and workshops in signal processing and AI
+    - Accepted paper at ACM ASIACCS 2026 (SCREAM framework)
+    - Active maintainer of open-source hardware security projects
+    - Regular contributor to formal verification and RTL design communities
+    - Attendance at conferences in hardware security and EDA
 
 - title: Tools & Technologies
   type: nested_list
   contents:
-    - title: Development Tools
+    - title: EDA & Hardware Tools
+      items:
+        - Yosys, SymbiYosys, Verilator, Icarus Verilog
+        - OpenLane, Magic VLSI, KLayout
+        - GTKWave, Surfer waveform viewer
+    - title: Development & DevOps
       items:
         - Git, GitHub, Docker, CI/CD pipelines
-        - Jupyter Notebooks, VS Code, Vim
+        - pre-commit hooks, linting, automated testing
     - title: Cloud & Computing
       items:
         - AWS, Google Cloud Platform
         - CUDA, OpenCL for GPU computing
-        - Distributed computing frameworks
-    - title: Data Analysis
-      items:
-        - Pandas, NumPy, SciPy
-        - Matplotlib, Seaborn, Plotly
-        - SQL, NoSQL databases
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Technical:</u> Open-source hardware, Quantum computing, Blockchain technology
-    - <u>Personal:</u> Photography, Travel, Music production, Reading technical papers
+    - <u>Technical:</u> Open-source hardware, Quantum computing, RISC-V ecosystem
+    - <u>Personal:</u> Photography, Travel, Reading technical papers

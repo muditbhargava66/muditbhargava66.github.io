@@ -2,6 +2,10 @@ github_users:
   - muditbhargava66
 
 github_repos:
+  - muditbhargava66/open-crypto-hdl
+  - muditbhargava66/JTAG-1500-1687-Network-Design-and-Verification
+  - muditbhargava66/Superscalar-Pipeline-Simulator
+  - muditbhargava66/FraudShield
   - muditbhargava66/llvm-dl-optimizer
   - muditbhargava66/Advanced-Image-Sensor-Interface
   - muditbhargava66/pico-rtos
@@ -9,12 +13,9 @@ github_repos:
   - muditbhargava66/FFT-implementation-in-C
   - muditbhargava66/serdes-validation-framework
   - muditbhargava66/FIX-FastTrade
-  - muditbhargava66/JTAG-1500-1687-Network-Design-and-Verification
-  - muditbhargava66/Superscalar-Pipeline-Simulator
   - muditbhargava66/NeoRAM
   - muditbhargava66/vmips-simulator
   - muditbhargava66/RISC-V-Processor-Verilog
-  - muditbhargava66/FraudShield
   - muditbhargava66/5G-NR-Modem-Software-Development
   - muditbhargava66/PyxLSTM
   - muditbhargava66/SimpleARM
