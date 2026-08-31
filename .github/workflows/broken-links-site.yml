@@ -39,8 +39,9 @@ jobs:
           npm install -g purgecss
           purgecss -c purgecss.config.js
       - name: Link Checker 🔗
-        uses: lycheeverse/lychee-action@v2.0.2
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           fail: true
-          # only check local links
-          args: --offline --root-dir _site --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
+          # only check local links; the books-app remap must come first so the
+          # generic subpage-asset remap doesn't rewrite real bundle paths
+          args: --offline --root-dir ${{ github.workspace }}/_site --remap '_site/books-app/assets/(.*) _site/books-app/assets/$1' --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
