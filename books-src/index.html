@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Complete Shelf</title>
+  </head>
+  <body>
+    <div id="app">
+      <main id="press-experience" class="press-experience is-browsing">
+        <canvas
+          id="shelf-canvas"
+          class="shelf-canvas"
+          role="application"
+          tabindex="0"
+          aria-label="Interactive three-dimensional shelf of books."
+        ></canvas>
+
+        <header class="site-header">
+          <a href="/" target="_parent" class="wordmark" aria-label="Books" style="text-decoration: none; color: inherit">
+            <span>Mudit Bhargava</span>
+            <span class="wordmark__divider"></span>
+            <span>Library</span>
+          </a>
+          <div class="header-actions">
+            <div class="edition-mark">
+              <span id="volume-count">0 VOLUMES</span>
+              <span>01 CONTINUOUS SHELF</span>
+            </div>
+          </div>
+        </header>
+
+        <section id="browse-caption" class="browse-caption">
+          <p class="eyebrow">
+            <span id="active-index">01</span>
+            <span class="eyebrow__line"></span>
+            <span id="active-title">Title</span>
+          </p>
+        </section>
+
+        <section id="focused-caption" class="book-details" aria-hidden="true">
+          <div class="book-details__inner">
+            <button class="back-button" id="btn-back">
+              <span class="arrow-icon arrow-icon--left"></span>
+              <span>Back</span>
+            </button>
+
+            <div class="book-details__position">
+              <span id="focus-index">01</span>
+              <span>Continuous Shelf</span>
+            </div>
+
+            <div class="book-details__copy">
+              <p class="eyebrow" id="focus-author">Author</p>
+              <h2 id="focus-title">Title</h2>
+              <p class="book-details__description" id="focus-description">Description</p>
+
+              <blockquote>
+                <p id="focus-quote">Quote</p>
+                <cite id="focus-quote-by">Quote by</cite>
+              </blockquote>
+
+              <dl>
+                <div>
+                  <dt>Format</dt>
+                  <dd id="focus-format">Format</dd>
+                </div>
+                <div>
+                  <dt>Availability</dt>
+                  <dd id="focus-availability">Availability</dd>
+                </div>
+              </dl>
+
+              <a id="focus-link" href="#" target="_blank" rel="noopener noreferrer" class="official-link">
+                <span>Read More</span>
+                <span class="arrow-icon arrow-icon--right"></span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <div class="interaction-instructions">
+          <div class="instruction">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="m15 9-3 3-3-3" />
+              <path d="m15 15-3-3-3 3" />
+            </svg>
+            <span>Scroll</span>
+          </div>
+          <div class="instruction">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 9c0-2.2 1.8-4 4-4h6c2.2 0 4 1.8 4 4v6c0 2.2-1.8 4-4 4H9c-2.2 0-4-1.8-4-4V9z" />
+              <path d="M9 14h6" />
+              <path d="M12 11v6" />
+            </svg>
+            <span>Drag</span>
+          </div>
+          <div class="instruction">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span>Keys</span>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <button id="btn-prev" class="nav-button">Prev</button>
+          <button id="btn-inspect" class="nav-button">Inspect</button>
+          <button id="btn-next" class="nav-button">Next</button>
+        </footer>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

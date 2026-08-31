@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <!-- Head -->
+  <head>
+    {% include head.liquid %}
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      .bookshelf-container {
+        height: calc(100vh - 56px); /* Approximate header height */
+        width: 100vw;
+        position: relative;
+        overflow: hidden;
+      }
+      @media (min-width: 992px) {
+        .bookshelf-container {
+          height: calc(100vh - 66px); /* Desktop header height */
+        }
+      }
+    </style>
+  </head>
+
+  <!-- Body -->
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %}">
+    <!-- Header -->
+    {% include header.liquid %}
+
+    <!-- Search Modal (Cmd+K) -->
+    {% include search-modal.liquid %}
+
+    <!-- Content -->
+    <div class="bookshelf-container" role="main">
+      {{ content }}
+    </div>
+
+    <!-- JavaScripts -->
+    {% include scripts/jquery.liquid %}
+    {% include scripts/bootstrap.liquid %}
+    {% include scripts/misc.liquid %}
+  </body>
+</html>

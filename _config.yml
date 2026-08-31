@@ -214,6 +214,8 @@ kramdown:
 include: ["_pages"]
 exclude:
   - bin/
+  - books-app-temp/
+  - books-src/
   - CONTRIBUTING.md
   - CUSTOMIZE.md
   - Dockerfile
@@ -225,6 +227,7 @@ exclude:
   - INSTALL.md
   - LICENSE
   - lighthouse_results/
+  - mint-playground/
   - package.json
   - package-lock.json
   - _pages/about_einstein.md
