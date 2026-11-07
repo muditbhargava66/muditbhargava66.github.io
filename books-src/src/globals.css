@@ -1115,3 +1115,104 @@ canvas:focus-visible {
   opacity: 0;
   pointer-events: none;
 }
+
+.shelf-fallback {
+  position: absolute;
+  z-index: 30;
+  inset: 0;
+  display: none;
+  overflow-y: auto;
+  padding: clamp(88px, 14vh, 148px) clamp(24px, 3.4vw, 56px) 96px;
+  background: var(--paper);
+}
+
+.press-experience[data-shelf-state="failed"] .shelf-fallback {
+  display: block;
+}
+
+.press-experience[data-shelf-state="failed"] .shelf-canvas,
+.press-experience[data-shelf-state="failed"] .loading-screen,
+.press-experience[data-shelf-state="failed"] .experience-status,
+.press-experience[data-shelf-state="failed"] .browse-caption,
+.press-experience[data-shelf-state="failed"] .book-details,
+.press-experience[data-shelf-state="failed"] .interaction-instructions,
+.press-experience[data-shelf-state="failed"] .site-footer {
+  display: none;
+}
+
+.shelf-fallback__head {
+  max-width: 52ch;
+}
+
+.shelf-fallback__title {
+  margin: 14px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(30px, 4.2vw, 52px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+
+.shelf-fallback__reason {
+  max-width: 46ch;
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+.shelf-fallback__reason a {
+  color: var(--accent);
+}
+
+.shelf-fallback__list {
+  max-width: 68ch;
+  margin: clamp(36px, 7vh, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shelf-fallback__item {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  padding: 15px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.shelf-fallback__item:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.shelf-fallback__index {
+  flex-shrink: 0;
+  width: 26px;
+  color: var(--ink-soft);
+  font-size: 9px;
+  font-weight: 620;
+  letter-spacing: 0.14em;
+}
+
+.shelf-fallback__title-link {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.shelf-fallback__title-link:hover {
+  color: var(--accent);
+}
+
+.shelf-fallback__author {
+  margin-left: auto;
+  color: var(--ink-soft);
+  font-size: 12px;
+  text-align: right;
+}
+
+.shelf-fallback.is-static {
+  position: fixed;
+  display: block;
+}

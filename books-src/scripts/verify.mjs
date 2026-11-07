@@ -75,6 +75,17 @@ const diag = (page) => page.evaluate(() => window.__PRESS_LIBRARY__.diagnostics(
   check("desktop: no shelf collision at load", d.currentCollision === null && d.collisionRejects === 0, JSON.stringify(d.currentCollision));
   check("desktop: overview framing at load (vPan≈0.5)", Math.abs(d.vPan - 0.5) < 0.05, `vPan=${d.vPan.toFixed(2)}`);
 
+  const readyState = await page.evaluate(() => {
+    const status = document.getElementById("experience-status-text");
+    const loading = document.getElementById("loading-screen");
+    return {
+      status: status ? status.textContent : null,
+      loadingHidden: loading ? getComputedStyle(loading).visibility === "hidden" : null,
+    };
+  });
+  check("desktop: status pill reports the loaded shelf", /19 volumes ready/.test(readyState.status ?? ""), String(readyState.status));
+  check("desktop: loading screen clears once ready", readyState.loadingHidden === true);
+
   await page.mouse.move(720, 450);
   for (let i = 0; i < 10; i++) {
     await page.mouse.wheel(0, 120);
@@ -124,6 +135,49 @@ const diag = (page) => page.evaluate(() => window.__PRESS_LIBRARY__.diagnostics(
   check("mobile: canvas at phone width", d.canvas.clientWidth <= 400, `w=${d.canvas.clientWidth}`);
   check("mobile: portrait starts on tech shelf (vPan≈0)", d.vPan < 0.05, `vPan=${d.vPan.toFixed(2)}`);
   check("mobile: zero console errors", consoleErrors.length === 0, consoleErrors.slice(0, 3).join(" | "));
+  await page.close();
+}
+
+{
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (type, ...rest) {
+      if (String(type).includes("webgl")) return null;
+      return original.call(this, type, ...rest);
+    };
+  });
+  await page.goto(base);
+  await page.waitForTimeout(2500);
+
+  const fallback = await page.evaluate(() => {
+    const root = document.getElementById("press-experience");
+    const list = document.getElementById("shelf-fallback-list");
+    const panel = document.getElementById("shelf-fallback");
+    const loading = document.getElementById("loading-screen");
+    return {
+      state: root ? root.dataset.shelfState : null,
+      panelVisible: panel ? getComputedStyle(panel).display !== "none" : false,
+      items: list ? list.childElementCount : 0,
+      firstHref: list ? list.querySelector("a")?.getAttribute("href") ?? null : null,
+      firstRel: list ? list.querySelector("a")?.getAttribute("rel") ?? null : null,
+      canvasHidden: (() => {
+        const canvas = document.getElementById("shelf-canvas");
+        return canvas ? getComputedStyle(canvas).display === "none" : false;
+      })(),
+      loadingHidden: loading ? getComputedStyle(loading).display === "none" : false,
+    };
+  });
+
+  check("webgl-off: shelf reports the failed state", fallback.state === "failed", String(fallback.state));
+  check("webgl-off: catalogue fallback is shown", fallback.panelVisible && fallback.canvasHidden && fallback.loadingHidden);
+  check("webgl-off: every volume is listed", fallback.items === 19, `items=${fallback.items}`);
+  check(
+    "webgl-off: links are external and safe",
+    Boolean(fallback.firstHref?.startsWith("http")) && fallback.firstRel === "noopener noreferrer",
+    `${fallback.firstHref} rel=${fallback.firstRel}`
+  );
+
   await page.close();
 }
 

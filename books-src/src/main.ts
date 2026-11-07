@@ -64,45 +64,100 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
+  const setStatus = (message: string) => {
+    const el = document.getElementById("experience-status-text");
+    if (el) el.textContent = message;
+  };
+
+  const showFallback = (reason: string) => {
+    const reasonEl = document.getElementById("shelf-fallback-reason");
+    if (reasonEl) reasonEl.textContent = reason;
+
+    const list = document.getElementById("shelf-fallback-list");
+    if (list && !list.childElementCount) {
+      catalog.forEach((book, index) => {
+        const item = document.createElement("li");
+        item.className = "shelf-fallback__item";
+
+        const number = document.createElement("span");
+        number.className = "shelf-fallback__index";
+        number.textContent = String(index + 1).padStart(2, "0");
+
+        const link = document.createElement("a");
+        link.className = "shelf-fallback__title-link";
+        link.href = book.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = book.title;
+
+        const author = document.createElement("span");
+        author.className = "shelf-fallback__author";
+        author.textContent = book.author;
+
+        item.append(number, link, author);
+        list.append(item);
+      });
+    }
+
+    pressExperience.dataset.shelfState = "failed";
+  };
+
   await document.fonts.ready;
 
-  const engine = new ShelfEngine(canvas, catalog, {
-    onActiveIndex: (index) => {
-      activeIndex = index;
-      updateUI();
-    },
-    onMode: (nextMode, index) => {
-      mode = nextMode;
-      selectedIndex = index;
-      updateUI();
-    },
-    onStatus: (status) => {
-      console.log("Status:", status);
-    },
-    onReady: () => {
-      pressExperience.classList.add("is-ready");
-    },
-  });
+  let engine: ShelfEngine | null = null;
+  try {
+    engine = new ShelfEngine(canvas, catalog, {
+      onActiveIndex: (index) => {
+        activeIndex = index;
+        updateUI();
+      },
+      onMode: (nextMode, index) => {
+        mode = nextMode;
+        selectedIndex = index;
+        updateUI();
+      },
+      onStatus: (status) => {
+        setStatus(status);
+      },
+      onReady: () => {
+        pressExperience.classList.add("is-ready");
+        pressExperience.dataset.shelfState = "ready";
+      },
+    });
+  } catch (error) {
+    console.error("Shelf failed to start:", error);
+    showFallback(
+      "This browser could not start WebGL, so the three-dimensional shelf is unavailable. The full catalogue is listed below."
+    );
+    return;
+  }
 
-  document.getElementById("btn-prev")?.addEventListener("click", () => {
-    engine.browseBy(-1);
+  canvas.addEventListener("webglcontextlost", (event) => {
+    event.preventDefault();
+    showFallback(
+      "The graphics context was lost, usually because the GPU reset or ran out of memory. Reload the page to bring the shelf back."
+    );
   });
 
   updateUI();
 
+  document.getElementById("btn-prev")?.addEventListener("click", () => {
+    engine?.browseBy(-1);
+  });
+
   document.getElementById("btn-next")?.addEventListener("click", () => {
-    engine.browseBy(1);
+    engine?.browseBy(1);
   });
 
   document.getElementById("btn-inspect")?.addEventListener("click", () => {
     if (mode === "browse") {
-      engine.focusBook(activeIndex);
+      engine?.focusBook(activeIndex);
     }
   });
 
   document.getElementById("btn-back")?.addEventListener("click", () => {
     if (mode === "inspect") {
-      engine.returnToShelf();
+      engine?.returnToShelf();
     }
   });
 });
