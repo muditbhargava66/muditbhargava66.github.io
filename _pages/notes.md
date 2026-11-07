@@ -3,11 +3,9 @@ layout: page
 permalink: /my-notes/
 title: notes
 description: My personal digital garden of notes on various topics
-nav: true
+nav: false
 nav_order: 7
-redirect: https://muditbhargava66.github.io/notes/
+redirect: /blog/
 ---
 
-Redirecting to my digital garden of notes...
-
-If you are not redirected automatically, [click here](https://muditbhargava66.github.io/notes/).
+The notes live at [the blog](/blog/), which is being renamed to “notes”.

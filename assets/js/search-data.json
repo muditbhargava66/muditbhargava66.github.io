@@ -2,4 +2,39 @@
 layout: none
 permalink: /assets/js/search-data.json
 ---
-[]
+[
+{%- assign n = 0 -%}
+{%- for p in site.pages -%}
+  {%- comment -%}
+    notes.md.backup carries permalink: /notes/ but Jekyll writes it as
+    index.backup, so /notes/ is never served — keep it out of the index.
+  {%- endcomment -%}
+  {%- if p.path contains "_pages/" and p.title and p.dropdown != true and p.redirect == nil and p.url != "/404.html" and p.name != "notes.md.backup" -%}
+    {%- if n > 0 %},{% endif -%}
+    {%- assign n = n | plus: 1 -%}
+    {%- include search-item.liquid title=p.title url=p.url kind="page" content=p.content -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- comment -%}
+  jekyll-paginate-v2 consumes _pages/blog.md as its template and drops it from
+  site.pages, so the blog root has to be indexed by hand.
+  {%- endcomment -%}
+{%- if n > 0 %},{% endif -%}
+{%- assign n = n | plus: 1 -%}
+{%- include search-item.liquid title=site.blog_name url="/blog/" kind="page" content=site.blog_description -%}
+{%- for p in site.posts -%}
+  {%- if n > 0 %},{% endif -%}
+  {%- assign n = n | plus: 1 -%}
+  {%- include search-item.liquid title=p.title url=p.url kind="post" content=p.content -%}
+{%- endfor -%}
+{%- for p in site.projects -%}
+  {%- if n > 0 %},{% endif -%}
+  {%- assign n = n | plus: 1 -%}
+  {%- include search-item.liquid title=p.title url=p.url kind="project" content=p.content -%}
+{%- endfor -%}
+{%- for p in site.news -%}
+  {%- if n > 0 %},{% endif -%}
+  {%- assign n = n | plus: 1 -%}
+  {%- include search-item.liquid title=p.title url=p.url kind="news" content=p.content -%}
+{%- endfor -%}
+]

@@ -11,7 +11,6 @@ profile:
   more_info: >
     <p>Based in India</p>
     <p>Open to opportunities worldwide</p>
-    <p>muditbhargava666@gmail.com</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
@@ -45,5 +44,7 @@ Right now, I'm focused on:
 ## Get in Touch
 
 I'm always open to conversations about interesting technical challenges. If you're working on something in signal processing, need help with FPGA implementations, or want to discuss ML applications in finance, I'd be happy to connect.
+
+Email is the fastest way to reach me: <a href="mailto:{{ site.email | encode_email }}">{{ site.email }}</a>.
 
 Take a look at my [projects]({{ '/projects/' | relative_url }}) to see recent work, or browse my [publications]({{ '/publications/' | relative_url }}) for research I've been involved with.
