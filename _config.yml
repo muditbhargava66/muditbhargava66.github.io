@@ -159,7 +159,9 @@ giscus:
   lang: en
 
 # Disqus comments (DEPRECATED)
-disqus_shortname: notes # put your disqus shortname
+# Left blank on purpose: "notes" is al-folio's demo shortname, and it let a third
+# party render content on our own domain. Set only to a shortname you own.
+disqus_shortname: # put your disqus shortname
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 # External sources.
@@ -526,7 +528,9 @@ third_party_libraries:
     version: "1.9.4"
   mathjax:
     integrity:
-      js: "sha256-rjmgmaB99riUNcdlrDtcAiwtLIojSxNyUFdl+Qh+rB4="
+      # Digest of the file jsdelivr actually serves for 3.2.0. The previous hash did not
+      # match, so the browser blocked MathJax and no math rendered on any page.
+      js: "sha256-YyRhy+F3bG+zvvwsW1E/uy5s5pKXwmG/bOPlV+1pt6o="
     local:
       fonts: "output/chtml/fonts/woff-v2/"
     url:
