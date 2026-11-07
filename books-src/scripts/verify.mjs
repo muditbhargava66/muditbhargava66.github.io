@@ -159,8 +159,8 @@ const diag = (page) => page.evaluate(() => window.__PRESS_LIBRARY__.diagnostics(
       state: root ? root.dataset.shelfState : null,
       panelVisible: panel ? getComputedStyle(panel).display !== "none" : false,
       items: list ? list.childElementCount : 0,
-      firstHref: list ? list.querySelector("a")?.getAttribute("href") ?? null : null,
-      firstRel: list ? list.querySelector("a")?.getAttribute("rel") ?? null : null,
+      firstHref: list ? (list.querySelector("a")?.getAttribute("href") ?? null) : null,
+      firstRel: list ? (list.querySelector("a")?.getAttribute("rel") ?? null) : null,
       canvasHidden: (() => {
         const canvas = document.getElementById("shelf-canvas");
         return canvas ? getComputedStyle(canvas).display === "none" : false;

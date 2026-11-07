@@ -126,17 +126,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (error) {
     console.error("Shelf failed to start:", error);
-    showFallback(
-      "This browser could not start WebGL, so the three-dimensional shelf is unavailable. The full catalogue is listed below."
-    );
+    showFallback("This browser could not start WebGL, so the three-dimensional shelf is unavailable. The full catalogue is listed below.");
     return;
   }
 
   canvas.addEventListener("webglcontextlost", (event) => {
     event.preventDefault();
-    showFallback(
-      "The graphics context was lost, usually because the GPU reset or ran out of memory. Reload the page to bring the shelf back."
-    );
+    showFallback("The graphics context was lost, usually because the GPU reset or ran out of memory. Reload the page to bring the shelf back.");
   });
 
   updateUI();

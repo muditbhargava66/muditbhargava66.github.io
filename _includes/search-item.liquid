@@ -1,7 +1,4 @@
 {%- assign body = include.content | strip_html | normalize_whitespace | truncatewords: 40 -%}
-{
-  "title": {{ include.title | jsonify }},
-  "url": {{ include.url | relative_url | jsonify }},
-  "type": {{ include.kind | jsonify }},
-  "content": {{ body | jsonify }}
+{ "title": {{ include.title | jsonify }}, "url": {{ include.url | relative_url | jsonify }}, "type": {{ include.kind | jsonify }}, "content":
+{{ body | jsonify }}
 }
