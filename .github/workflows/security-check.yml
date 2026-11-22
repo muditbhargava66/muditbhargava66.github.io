@@ -19,7 +19,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.4.5"
+          ruby-version: "3.4"
           bundler-cache: true
 
       - name: Run bundle audit
@@ -29,7 +29,9 @@ jobs:
         continue-on-error: true
 
       - name: Check outdated gems
-        run: bundle outdated --only-explicit || true
+        run: |
+          bundle config unset --local deployment
+          bundle outdated --only-explicit || true
         continue-on-error: true
 
       - name: Security Summary
